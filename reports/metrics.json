@@ -1,0 +1,16 @@
+{
+  "f1_macro_baseline_da_so": 0.059,
+  "f1_macro_mo_hinh_chinh": 0.832,
+  "f1_theo_nhan": {
+    "KHAC": 0.81,
+    "MAN_HINH": 0.901,
+    "NUOC_VAO": 0.831,
+    "PHAN_MEM": 0.78,
+    "PIN": 0.848,
+    "SAC": 0.821
+  },
+  "hat_giong": 42,
+  "so_mau_test": 360,
+  "so_mau_train": 1680,
+  "so_mau_val": 360
+}
