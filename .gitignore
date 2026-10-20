@@ -21,3 +21,6 @@ models/*.joblib
 # OS
 .DS_Store
 Thumbs.db
+
+artifacts/*.joblib
+artifacts/*.pkl

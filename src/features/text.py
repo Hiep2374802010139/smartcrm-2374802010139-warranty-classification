@@ -2,7 +2,12 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 def lam_sach(s):
-    """Làm sạch văn bản, GIỮ DẤU tiếng Việt, thay thế thông tin định danh"""
+    """
+    HỢP ĐỒNG DỮ LIỆU:
+    - Hình dạng: Nhận vào 1 chuỗi (string) hoặc None. 
+    - Ý nghĩa: Trả về chuỗi đã chuẩn hóa (lowercase, giữ dấu, che SĐT/Email).
+    - Hành vi khi sai: Nếu đầu vào là None hoặc không phải string -> trả về chuỗi rỗng "", KHÔNG ném ngoại lệ.
+    """
     if not isinstance(s, str):
         return ""
     s = s.lower()
