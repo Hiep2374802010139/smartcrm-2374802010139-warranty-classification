@@ -14,9 +14,9 @@ Dự án xây dựng module cốt lõi cho hệ thống SmartCRM của Mekong Mo
 ## 3. Hướng dẫn cài đặt và chạy (Từng bước một lệnh)
 
 **Bước 1: Cài đặt các thư viện phụ thuộc**
-```bash
+bash
 pip install -r requirements.txt
-**Bước 2: Huấn luyện mô hình (Chạy bằng 1 lệnh)**
 
+**Bước 2: Huấn luyện mô hình (Chạy bằng 1 lệnh)**
 bash
 python -m src.models.train --config configs/train.yaml
