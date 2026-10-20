@@ -2,7 +2,6 @@
 
 **Họ và tên:** Lê Hoàng Hiệp
 **MSSV:** 2374802010139
-**Lớp:** 261_71ITGR40203_05
 **Track:** AI (Trí tuệ nhân tạo)
 
 ## 1. Mô tả hệ thống
