@@ -1,0 +1,10 @@
+services:
+  model:
+    build:
+      context: .
+      dockerfile: Dockerfile    # <-- Sửa dòng này (bỏ chữ serve/)
+    environment:
+      NGUONG_TIN_CAY: 0.45
+      LOG_LEVEL: info
+    ports:
+      - "8080:8080"
