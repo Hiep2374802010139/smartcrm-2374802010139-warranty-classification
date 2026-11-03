@@ -6,7 +6,8 @@ from sklearn.dummy import DummyClassifier
 from sklearn.metrics import f1_score, confusion_matrix
 from src.data.split import chia_du_lieu
 from src.features.text import lam_sach, tao_vectorizer
-
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--config', required=True)
     cfg = yaml.safe_load(open(ap.parse_args().config, encoding='utf-8'))
