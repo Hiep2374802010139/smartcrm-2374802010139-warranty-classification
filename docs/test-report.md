@@ -30,3 +30,4 @@
 
 ## 4. Minh chứng kết quả chạy
 - **Ảnh chụp màn hình Terminal chạy 10 test PASS:** [Xem ảnh tại đây](./screenshots/ket-qua-10-test.png)
+- **Minh chứng ảnh chụp:** Do toàn bộ 10 test case được chạy chung bằng một lệnh pytest -q, nên em sử dụng chung 1 ảnh chụp màn hình kết quả là docs/screenshots/ket-qua-10-test.png làm minh chứng cho tất cả các test case từ TC-01 đến TC-10. (Ảnh hiển thị rõ dòng chữ 10 passed).
