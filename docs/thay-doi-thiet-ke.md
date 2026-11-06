@@ -12,6 +12,8 @@
 - **Lý do**: Đảm bảo tính truy vết (traceability) giữa đặc tả và code.
 - **Ảnh hưởng**: Cập nhật lại tài liệu SRS mục 2.2.
 
-## TD-03: Xóa các tệp .py rỗng trong repo. 
-- **Lý do**: Theo phản hồi của GV, để repo gọn gàng và không gây hiểu nhầm. 
-- **Ảnh hưởng**: Không ảnh hưởng đến logic hệ thống.
+## TD-03: Xóa tệp .py rỗng trong repo
+- **Phản hồi của GV**: Repo còn một số tệp .py rỗng.
+- **Quyết định**: SỬA
+- **Lý do**: Để repo gọn gàng, tránh gây hiểu nhầm cho người chấm.
+- **Ảnh hưởng**: Không ảnh hưởng logic.
