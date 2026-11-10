@@ -8,7 +8,7 @@ __pycache__/
 venv/
 
 # Du lieu lon
-data/raw/
+
 models/*.pkl
 models/*.pt
 models/*.h5
