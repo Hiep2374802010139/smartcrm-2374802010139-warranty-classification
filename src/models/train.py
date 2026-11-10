@@ -7,6 +7,7 @@ from sklearn.metrics import f1_score, confusion_matrix
 from src.data.split import chia_du_lieu
 from src.features.text import lam_sach, tao_vectorizer
 import sys
+import os
 sys.stdout.reconfigure(encoding='utf-8')
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--config', required=True)
@@ -68,6 +69,8 @@ def main():
     }
     
     # Ghi metrics.json
+    os.makedirs('reports', exist_ok=True)
+
     with open('reports/metrics.json', 'w', encoding='utf-8') as f:
         json.dump(ket_qua_cuoi, f, ensure_ascii=False, indent=2, sort_keys=True)
     
