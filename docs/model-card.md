@@ -1,19 +1,40 @@
-Model Details: Logistic Regression/ComplementNB.
+# Model Card: Warranty Issue Classification
 
-Intended Use: Phân loại sự cố thiết bị.
+## 1. Basic Information
+- **Model name:** `warranty-classification` v1.0
+- **Author:** Lê Hoàng Hiệp (MSSV: 2374802010139)
 
-Factors: Không dùng để phân loại ảnh.
+## 2. Intended Use
+Suggests an issue category to intake staff based on free-text descriptions. Staff makes the final decision.
 
-Metrics: Macro F1 (0.8346), F1 từng nhãn.
+## 3. Out-of-Scope Uses (SHOULD NOT be used for)
+- NOT for automatically assigning technicians.
+- NOT for deciding warranty eligibility without human confirmation.
+- NOT for languages other than Vietnamese.
 
-Evaluation Data: Tập test 15% (2400 dòng).
+## 4. Training Data
+- **Source:** `issue_descriptions.csv` (2400 samples).
+- **Split:** 70/15/15 (stratified), `random_state=42`.
+- **Label Distribution:** MAN_HINH (32.8%), PIN (24.5%), etc.
 
-Training Data: File issue_descriptions.csv.
+## 5. Architecture and Processing
+- **Vectorizer:** TF-IDF (ngram 1-2, max_features=20000).
+- **Model:** ComplementNB (chosen via validation set comparison).
+- **Preprocessing:** Lowercase, keep Vietnamese diacritics, mask Phone/Email.
 
-Quantitative Analyses: Bảng F1 từng nhãn.
+## 6. Evaluation Metrics
+- **Test F1-macro:** `0.8346` (Data v1.0, seed 42).
+- **Per-label F1:** KHAC (0.81), MAN_HINH (0.90), NUOC_VAO (0.83), PHAN_MEM (0.77), PIN (0.86), SAC (0.85).
 
-Ethical Considerations: Dữ liệu được che PII (SĐT, Email).
+## 7. Baseline
+- **Dummy Classifier (Majority class):** F1-macro = `0.059`.
 
-Caveats and Recommendations: (Rất quan trọng) Nêu rõ hạn chế: Mô hình nhầm lẫn nhiều giữa PIN và SẠC do dùng chung từ ngữ. Nhãn PHẦN MỀM có Recall thấp nhất (66.7%).
+## 8. Measured Bias
+- Measured by label. The minority label `KHAC` (5.5% of data) achieved an F1 of 0.81, showing no significant bias against the minority class. The confusion matrix shows confusion between `PIN` and `SAC` due to similar wording.
 
-Model Version: v0.2 (hoặc 1.0.0).
+## 9. Risks and Limitations
+- **(a) Similar wording:** Descriptions for `PIN` and `SAC` are often confused. *Mitigation:* Staff reviews the top 3 predictions.
+- **(b) Low confidence:** If confidence is < 0.45, the system flags `can_nguoi_xem_lai = true`. *Mitigation:* Staff must choose manually.
+
+## 10. Maintenance
+- Retrain when the staff correction rate exceeds 35%, or when a new issue category is added.
