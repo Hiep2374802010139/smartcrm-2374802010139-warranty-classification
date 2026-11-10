@@ -7,7 +7,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 RUN useradd -m -u 10001 app
 COPY src ./src
-COPY artifacts/model_v1.joblib ./artifacts/model_v1.joblib
+COPY configs ./configs
+COPY data ./data
+
+# HUẤN LUYỆN MÔ HÌNH NGAY TRONG QUÁ TRÌNH BUILD
+RUN python -m src.models.train --config configs/train.yaml
+
 USER app
 
 ENV MODEL_PATH=artifacts/model_v1.joblib NGUONG_TIN_CAY=0.45
