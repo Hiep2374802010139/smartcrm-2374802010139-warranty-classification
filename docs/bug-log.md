@@ -26,3 +26,12 @@
 - **5. Nguyên nhân:** File `requirements.txt` chứa thư viện `pywinpty` (một thư viện chỉ dành riêng cho môi trường Windows). Khi Docker chạy trên nền tảng Linux, nó cố gắng biên dịch thư viện này từ mã nguồn nhưng môi trường `python:3.11-slim` không có sẵn trình biên dịch C/Rust (`cc`).
 - **6. Cách sửa:** Xóa dòng `pywinpty` ra khỏi file `requirements.txt` (vì khi chạy trên Docker Linux, thư viện này không cần thiết).
 - **7. Link commit và xác nhận:** [95c1019](https://github.com/Hiep2374802010139/smartcrm-2374802010139-warranty-classification/commit/95c1019) - Chạy lại `docker compose up -d --build` -> Build thành công, container chạy `healthy`.
+
+## BUG-004 · Major — Lỗi build Docker thất bại do thiếu thư mục chứa file báo cáo
+- **1. Mã và mức độ:** BUG-004 · Major (Quá trình đóng gói sản phẩm thất bại, không thể triển khai hệ thống).
+- **2. Phát hiện bởi:** Phép thử máy trắng (White-box test) - Clone repo vào thư mục trống `C:\test-bt3` và chạy lệnh `docker compose up -d --build`.
+- **3. Triệu chứng:** Quá trình build Docker bị dừng đột ngột ở bước `RUN python -m src.models.train`. Log hiển thị lỗi `FileNotFoundError: [Errno 2] No such file or directory: 'reports/metrics.json'`.
+- **4. Cách tái lập:** Xóa thư mục dự án hiện tại, clone lại repo từ GitHub về một thư mục hoàn toàn mới, sau đó chạy lệnh `docker compose up -d --build`.
+- **5. Nguyên nhân:** Thư mục `reports/` đã bị đưa vào file `.gitignore` (do chứa các file kết quả sinh ra tự động) nên không tồn tại khi clone về máy mới. Khi script `train.py` chạy xong, hàm lưu kết quả cố gắng ghi file `metrics.json` vào thư mục `reports/` nhưng thư mục mẹ này chưa được khởi tạo, dẫn đến lỗi sập tiến trình.
+- **6. Cách sửa:** Bổ sung thư viện `os` và thêm dòng lệnh `os.makedirs('reports', exist_ok=True)` vào file `src/models/train.py` (ngay trước đoạn code thực hiện ghi file `metrics.json`) để tự động tạo thư mục nếu nó chưa tồn tại.
+- **7. Link commit và xác nhận:** [21fd2ff](https://github.com/Hiep2374802010139/smartcrm-2374802010139-warranty-classification/commit/21fd2ff) - Chạy lại `docker compose up -d --build` từ thư mục trống -> Build thành công, container báo `healthy`.
